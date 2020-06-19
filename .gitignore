@@ -1,0 +1,6 @@
+*.flac
+*.wav
+mini_librispeech/s5/data
+mini_librispeech/s5/exp
+mini_librispeech/s5/corpus
+jenkins_home/

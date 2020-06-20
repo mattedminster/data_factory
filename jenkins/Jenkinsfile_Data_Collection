@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent{
+          docker { image 'data_factory' }
+    }
     parameters {
         string(name: 'target_saying', defaultValue: 'turn off the lights', description: 'What phrase do you want to collect more data for?')
         string(name: 'search_term', defaultValue: 'turn off the lights smart home', description: 'What search terms should we use to collect data?')

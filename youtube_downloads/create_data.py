@@ -6,11 +6,19 @@ import re
 import argparse
 from youtube_search import YoutubeSearch
 import json
+import os
 
-
-youtube_id = 'd5XTDmm0KUQ'
 
 def download_youtube(youtube_id, target_saying):
+	folder = './data/{}'.format(target_saying)
+	if not os.path.exists(folder):
+		os.makedirs(folder)
+
+	if os.path.exists('./data/{}/{}.wav'.format(target_saying, youtube_id)):
+		print("{} already exsists...skipping".format(youtube_id))
+		return False
+
+	f=open("./data/{}/transcript.txt".format(target_saying), "a+")
 	#print("youtube id: {}".format(youtube_id))
 	ydl_opts = {
 	    'outtmpl': youtube_id,
@@ -62,17 +70,23 @@ def download_youtube(youtube_id, target_saying):
 			
 			clean_line = re.sub(r'([^a-zA-Z ]+?)', '', text)
 			clean_line = clean_line.lower() #lowercase 
-			clean_line = clean_line.encode('utf-8')
+			#clean_line = clean_line.encode('utf-8')
+
+			
 
 			newAudio = AudioSegment.from_wav("wav")
 			newAudio = newAudio[t1:t2]
-			newAudio.export('{}_{}.wav'.format(youtube_id, clean_line), format="wav")
+			newAudio.export('./data/{}/{}.wav'.format(target_saying, youtube_id), format="wav")
+
+			
+			annotation_text = "{} {}\n".format(youtube_id, clean_line.upper())
+			f.write(annotation_text)
+			f.close()
 			return True
 
 	return False
 
 
-print("hi there")
 parser = argparse.ArgumentParser(prog="dataCollector")
 parser.add_argument('--target_saying', default="turn on the lights")
 parser.add_argument('--search_term', default="smart home tests")

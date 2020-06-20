@@ -1,0 +1,20 @@
+pipeline {
+    agent{
+           docker { image 'data_factory' 
+           args '-v /home/robot/data_factory/youtube_downloads:/youtube_downloads:rw -v /home/robot/data_factory/egs:/opt/kaldi/egs:rw '}
+    }
+    // parameters {
+    //     string(name: 'target_saying', defaultValue: 'turn off the lights', description: 'What phrase do you want to collect more data for?')
+    //     string(name: 'search_term', defaultValue: 'turn off the lights smart home', description: 'What search terms should we use to collect data?')
+    //     string(name: 'num_of_samples', defaultValue: '3', description: 'How many do you want to collect?')
+    //     string(name: 'max_searches', defaultValue: '50', description: 'Whats the max amount of videos we should search?')
+    // }
+
+    stages {
+        stage('Generate Files') {
+            steps {
+                sh "cd /opt/kaldi/egs/horseshoe && python3 generate_files.py"
+            }
+        }
+    }
+}

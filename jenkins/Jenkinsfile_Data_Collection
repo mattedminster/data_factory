@@ -1,6 +1,7 @@
 pipeline {
     agent{
-          docker { image 'data_factory' }
+           docker { image 'data_factory' 
+           args '-v /home/robot/data_factory/youtube_downloads:/youtube_downloads:rw -v /home/robot/data_factory/mini_librispeech:/opt/kaldi/egs/mini_librispeech:rw '}
     }
     parameters {
         string(name: 'target_saying', defaultValue: 'turn off the lights', description: 'What phrase do you want to collect more data for?')

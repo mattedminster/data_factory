@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Data Capture') {
             steps {
-                sh ./run_factory"
+                sh "./run_factory"
             }
         }
     }

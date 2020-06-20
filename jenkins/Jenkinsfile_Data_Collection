@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Data Capture') {
             steps {
-                sh "./run_factory"
+                sh "cd /youtube_downloads && ./create_data.py --target_saying ${params.target_saying} --search_term ${params.search_term} --num_of_samples ${params.num_of_samples} --max_searches ${params.max_searches}"
             }
         }
     }

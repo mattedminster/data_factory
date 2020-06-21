@@ -3,12 +3,10 @@ pipeline {
            docker { image 'data_factory' 
            args '-v /home/robot/data_factory/youtube_downloads:/youtube_downloads:rw -v /home/robot/data_factory/egs:/opt/kaldi/egs:rw '}
     }
-    // parameters {
-    //     string(name: 'target_saying', defaultValue: 'turn off the lights', description: 'What phrase do you want to collect more data for?')
-    //     string(name: 'search_term', defaultValue: 'turn off the lights smart home', description: 'What search terms should we use to collect data?')
-    //     string(name: 'num_of_samples', defaultValue: '3', description: 'How many do you want to collect?')
-    //     string(name: 'max_searches', defaultValue: '50', description: 'Whats the max amount of videos we should search?')
-    // }
+    parameters {
+        string(name: 'num_of_jobs', defaultValue: '14', description: 'How many jobs do you want to be sent out (can\'t be more than number of speakers you have)')
+        string(name: 'monophone_max', defaultValue: '14', description: 'How much of the data set should we sample for the monophone training?')
+    }
 
     stages {
         stage('Generate Files') {
@@ -53,7 +51,7 @@ pipeline {
         }
         stage('Monophone Training') {
             steps {
-                sh "cd /opt/kaldi/egs/horseshoe && ./monophone_training.sh"
+                sh "cd /opt/kaldi/egs/horseshoe && utils/subset_data_dir.sh --first data/train ${params.monophone_max} data/train_10k
             }
         }
     }

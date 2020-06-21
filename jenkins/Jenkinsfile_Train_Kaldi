@@ -36,11 +36,6 @@ pipeline {
                 sh "cd /opt/kaldi/egs/horseshoe/data/local/lang && ./nonsilence_phones.sh"
             }
         }
-        stage('Silence Phones') {
-            steps {
-                sh "cd /opt/kaldi/egs/horseshoe/data/local/lang && ./silence_phones.sh"
-            }
-        }
         stage('Optional Silence') {
             steps {
                 sh "cd /opt/kaldi/egs/horseshoe/data/local/lang && ./optional_silence.sh"

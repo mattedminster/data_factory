@@ -28,7 +28,7 @@ with open("lexicon") as f:
 
 lex = open("data/local/lang/lexicon.txt", "wb")
 lex.write("<oov> <oov>\n".encode('utf-8'))
-with open("words.txt") as f:
+with open("data/local/lang/words.txt") as f:
     for line in f:
         line = line.strip()
         if line in ref.keys():

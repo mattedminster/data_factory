@@ -1,0 +1,23 @@
+# compile-train-graphs --read-disambig-syms=data/lang/phones/disambig.int exp/mono_10k/tree exp/mono_10k/0.mdl data/lang/L.fst "ark:sym2int.pl --map-oov 1 -f 2- data/lang/words.txt < data/train_10k/split10/3/text|" "ark:|gzip -c >exp/mono_10k/fsts.3.gz" 
+# Started at Sun Jun 21 02:15:04 UTC 2020
+#
+compile-train-graphs --read-disambig-syms=data/lang/phones/disambig.int exp/mono_10k/tree exp/mono_10k/0.mdl data/lang/L.fst 'ark:sym2int.pl --map-oov 1 -f 2- data/lang/words.txt < data/train_10k/split10/3/text|' 'ark:|gzip -c >exp/mono_10k/fsts.3.gz' 
+sh: 1: cannot open data/train_10k/split10/3/text: No such file
+LOG (compile-train-graphs[5.5.0~1-da93]:main():compile-train-graphs.cc:147) compile-train-graphs: succeeded for 0 graphs, failed for 0
+WARNING (compile-train-graphs[5.5.0~1-da93]:Close():kaldi-io.cc:515) Pipe sym2int.pl --map-oov 1 -f 2- data/lang/words.txt < data/train_10k/split10/3/text| had nonzero return status 512
+ERROR (compile-train-graphs[5.5.0~1-da93]:~SequentialTableReaderArchiveImpl():util/kaldi-table-inl.h:678) TableReader: error detected closing archive 'sym2int.pl --map-oov 1 -f 2- data/lang/words.txt < data/train_10k/split10/3/text|'
+
+[ Stack-Trace: ]
+/opt/kaldi/src/lib/libkaldi-base.so(kaldi::MessageLogger::LogMessage() const+0x82c) [0x7f3bbd1b62aa]
+compile-train-graphs(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x21) [0x41450f]
+compile-train-graphs(kaldi::SequentialTableReaderArchiveImpl<kaldi::BasicVectorHolder<int> >::~SequentialTableReaderArchiveImpl()+0x111) [0x4165e3]
+compile-train-graphs(kaldi::SequentialTableReaderArchiveImpl<kaldi::BasicVectorHolder<int> >::~SequentialTableReaderArchiveImpl()+0x9) [0x41665b]
+compile-train-graphs(kaldi::SequentialTableReader<kaldi::BasicVectorHolder<int> >::~SequentialTableReader()+0x12) [0x417074]
+compile-train-graphs(main+0x10ab) [0x412da1]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0) [0x7f3bbc309830]
+compile-train-graphs(_start+0x29) [0x411c29]
+
+terminate called after throwing an instance of 'kaldi::KaldiFatalError'
+  what():  kaldi::KaldiFatalError
+# Accounting: time=1 threads=1
+# Ended (code 134) at Sun Jun 21 02:15:05 UTC 2020, elapsed time 1 seconds

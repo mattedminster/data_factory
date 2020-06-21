@@ -9,7 +9,7 @@ train_path = './data/train'
 
 
 #text
-f = open("text","w+")
+f = open("./data/train/text","w+")
 
 for root, dirs, files in os.walk(train_path):
     for file in files:

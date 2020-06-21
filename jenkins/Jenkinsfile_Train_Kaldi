@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Extract MFCC') {
             steps {
-                sh "cd /opt/kaldi/egs/horseshoe && ./extract_mffc.sh"
+                sh "cd /opt/kaldi/egs/horseshoe && mfccdir=mfcc && x=data/train && steps/make_mfcc.sh --cmd \"run.pl\" --nj ${params.num_of_jobs} $x exp/make_mfcc/$x $mfccdir  && steps/compute_cmvn_stats.sh $x exp/make_mfcc/$x $mfccdir"
             }
         }
         stage('Monophone Training') {

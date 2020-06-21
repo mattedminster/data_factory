@@ -49,9 +49,19 @@ pipeline {
                 sh "cd /opt/kaldi/egs/horseshoe && steps/make_mfcc.sh --cmd \"run.pl\" --nj ${params.num_of_jobs} data/train exp/make_mfcc/data/train mfcc && steps/compute_cmvn_stats.sh data/train exp/make_mfcc/data/train mfcc"
             }
         }
-        stage('Monophone Training') {
+        stage('Subset Monophone') {
             steps {
                 sh "cd /opt/kaldi/egs/horseshoe && utils/subset_data_dir.sh --first data/train ${params.monophone_max} data/train_10k"
+            }
+        }
+        stage('Train Monophones') {
+            steps {
+                sh "cd /opt/kaldi/egs/horseshoe && steps/train_mono.sh --boost-silence 1.25 --nj 10 --cmd \"run.pl\" data/train_10k data/lang exp/mono_10k"
+            }
+        }
+        stage('Align Monophones') {
+            steps {
+                sh "cd /opt/kaldi/egs/horseshoe && steps/align_si.sh --boost-silence 1.25 --nj 16 --cmd \"run.pl\" data/train data/lang exp/mono_10k exp/mono_ali || exit 1;"
             }
         }
     }

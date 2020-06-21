@@ -51,7 +51,7 @@ pipeline {
         }
         stage('Monophone Training') {
             steps {
-                sh "cd /opt/kaldi/egs/horseshoe && utils/subset_data_dir.sh --first data/train ${params.monophone_max} data/train_10k
+                sh "cd /opt/kaldi/egs/horseshoe && utils/subset_data_dir.sh --first data/train ${params.monophone_max} data/train_10k"
             }
         }
     }

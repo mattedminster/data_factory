@@ -21,3 +21,29 @@ for root, dirs, files in os.walk(train_path):
 f.close()
 
 
+
+#wav.scp
+f = open("wav.scp","w+")
+
+for root, dirs, files in os.walk(train_path):
+    for file in files:
+        if ".wav" in file:
+            #read the file
+            path = "{}/{}".format(root, file)
+            wav_entry = "{} {}\n".format(file.split(".")[0], path)
+            f.write(wav_entry)
+f.close()
+
+#utt2spk
+f = open("utt2spk","w+")
+
+for root, dirs, files in os.walk(train_path):
+    for file in files:
+        if ".wav" in file:
+            #read the file
+            path = "{}/{}".format(root, file)
+            wav_entry = "{} {}\n".format(file.split(".")[0], file.split(".")[0])
+            f.write(wav_entry)
+f.close()
+
+

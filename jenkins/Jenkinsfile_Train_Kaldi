@@ -21,9 +21,14 @@ pipeline {
                 sh "cd /opt/kaldi/egs/horseshoe && ./cut.sh"
             }
         }
-        stage('Filter') {
+        stage('Filter Lexicon') {
             steps {
                 sh "cd /opt/kaldi/egs/horseshoe && python3 filter_dict.py"
+            }
+        }
+        stage('Generate spk2utt') {
+            steps {
+                sh "cd /opt/kaldi/egs/horseshoe && utils/fix_data_dir.sh data/train"
             }
         }
     }

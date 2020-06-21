@@ -27,7 +27,7 @@ with open("lexicon") as f:
 #print(ref)
 
 lex = open("data/local/lang/lexicon.txt", "wb")
-lex.write("<oov> <oov>\n")
+lex.write("<oov> <oov>\n".encode('utf-8'))
 with open("words.txt") as f:
     for line in f:
         line = line.strip()

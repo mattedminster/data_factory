@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Cut') {
             steps {
-                sh "cd /opt/kaldi/egs/horseshoe && cut -d ' ' -f 2- text | sed 's/ /\n/g' | sort -u > words.txt"
+                sh "cd /opt/kaldi/egs/horseshoe && ./cut.sh"
             }
         }
     }

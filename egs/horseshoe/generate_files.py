@@ -23,7 +23,7 @@ f.close()
 
 
 #wav.scp
-f = open("wav.scp","w+")
+f = open("./data/train/wav.scp","w+")
 
 for root, dirs, files in os.walk(train_path):
     for file in files:

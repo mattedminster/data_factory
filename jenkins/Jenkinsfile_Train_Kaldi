@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Nonsilence_phones') {
             steps {
-                sh "cd /opt/kaldi/egs/horseshoe && ./nonsilence_phones.sh"
+                sh "cd /opt/kaldi/egs/horseshoe/data/local/lang && ./nonsilence_phones.sh"
             }
         }
     }

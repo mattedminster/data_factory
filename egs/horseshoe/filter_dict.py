@@ -12,7 +12,7 @@ import os
 ref = dict()
 phones = dict()
 
-with open("../lexicon") as f:
+with open("lexicon") as f:
     for line in f:
         line = line.strip()
         columns = line.split(" ", 1)
@@ -24,16 +24,17 @@ with open("../lexicon") as f:
             ref[word] = list()
             ref[word].append(pron)
 
-print ref
+#print(ref)
 
 lex = open("data/local/lang/lexicon.txt", "wb")
-
-with open("data/train/words.txt") as f:
+lex.write("<oov> <oov>\n")
+with open("words.txt") as f:
     for line in f:
         line = line.strip()
         if line in ref.keys():
             for pron in ref[line]:
-                lex.write(line + " " + pron+"\n")
+                lex.write((line + " " + pron+"\n").encode('utf-8'))
         else:
-            print "Word not in lexicon:" + line
+            print("Word not in lexicon:" + line)
+            
 

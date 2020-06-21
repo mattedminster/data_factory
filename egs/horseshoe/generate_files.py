@@ -35,7 +35,7 @@ for root, dirs, files in os.walk(train_path):
 f.close()
 
 #utt2spk
-f = open("utt2spk","w+")
+f = open("./data/train/utt2spk","w+")
 
 for root, dirs, files in os.walk(train_path):
     for file in files:

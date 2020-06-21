@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Cut') {
             steps {
-                sh "cd /opt/kaldi/egs/horseshoe && ./cut.sh"
+                sh "cd /opt/kaldi/egs/horseshoe/data/local/lang && ./cut.sh"
             }
         }
         stage('Filter Lexicon') {

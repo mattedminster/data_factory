@@ -21,5 +21,10 @@ pipeline {
                 sh "cd /opt/kaldi/egs/horseshoe && ./cut.sh"
             }
         }
+        stage('Filter') {
+            steps {
+                sh "cd /opt/kaldi/egs/horseshoe && python3 filter_dict.py"
+            }
+        }
     }
 }
